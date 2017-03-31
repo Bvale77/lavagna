@@ -1,0 +1,39 @@
+/**
+ * website's styles
+ */
+body {
+	font-family: sans-serif;
+	margin: 0;
+}
+
+h1 {
+	font-family: Comic Sans MS;
+}
+
+h1, p {
+	text-align: center;
+}
+
+a {
+	color: #4786c3;
+	text-decoration: none;
+}
+a:hover, a:focus {
+	text-decoration: underline;
+}
+
+
+code {
+	font-family: Monaco, "Monaco for Powerline", Menlo, Consolas, "Courier New", monospace
+}
+
+
+#container {
+	width: 750px;
+	max-width: 100%;
+	margin: 10px auto;
+}
+
+.example {
+	margin: 60px 0;
+}
