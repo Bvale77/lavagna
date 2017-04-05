@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Documento senza titolo</title>
+<style>
+	body{ background-color: white; }
+	
+	#stuffs{
+		position: absolute;
+		z-index: 1;
+		width: 800px;
+		height: 520px;
+		text-align: center;
+		left:120px;
+	}
+	
+	#canvas {
+		position: relative; border:0px solid red; z-index: 2; text-align: center;
+	}	
+	</style>
+<style type="text/css">
+#gallery {
+	margin: 0 auto;
+	padding: 2em 0;
+	height: 500px;
+	width: 800px;
+}
+div.pic {
+	float: left;
+	width: 160px;
+	height: 150px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	position: relative;
+}
+div.pic img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+div.pic a.zoom {
+	display: block;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+#full {
+	position: absolute;
+	top:10px;
+	left: 0px;
+	clear: both;
+	padding-top: 10px;
+	width: 800px;
+	height: 510px;
+	display: none;
+}
+	#pen, #evidenz, #eraser, #select{
+		width: 40px;
+		height: 40px;
+		border: 0px;
+		padding: 0px;
+	}
+</style>
+</head>
+
+<body>
+
+	<div style="width: 1024px; height: 640px; text-align: center;">
+		<div><img src="images/header.jpg" width="1024" height="105" alt=""/></div>
+
+		
+		<div id="stuffs">
+			<div id="gallery">
+
+<div style="width: 100%">
+	<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/01big.jpg" alt="" /></a>
+	
+	</div>
+	
+	<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/02big.jpg" alt="" /></a>
+	
+	</div>
+	
+	<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/03big.jpg" alt="" /></a>
+	
+	</div>
+	
+	<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/04big.jpg" alt="" /></a>
+	
+	</div>
+	</div>
+<div style="width: 100%">	
+	<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/05big.jpg" alt="" /></a>
+	
+	</div>
+		<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/06big.jpg" alt="" /></a>
+	
+	</div>
+		<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/07big.jpg" alt="" /></a>
+	
+	</div>
+		<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/08big.jpg" alt="" /></a>
+	
+	</div>
+
+</div>
+
+
+<div style="width: 100%">	
+	<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/09big.jpg" alt="" /></a>
+	
+	</div>
+		<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/10big.jpg" alt="" /></a>
+	
+	</div>
+		<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/11big.jpg" alt="" /></a>
+	
+	</div>
+		<div class="pic">
+	
+		<a href="#" class="zoom"><img src="images/12big.jpg" alt="" /></a>
+	
+	</div>
+
+</div>
+	</div>
+		</div>
+
+	<canvas id="canvas" width="880" height="520"></canvas>
+		
+	</div>
+
+<br>
+<div style="width: 100%; padding-left: 100px;">
+<div style="float:left;padding:5px;">
+<button id="select" onclick="SwitchZIndex('')"><img src="images/ico_selettore.jpg" width="40" height="40" alt=""/></button>
+</div>
+
+<div style="float:left;padding:5px;">
+<button id="pen" onclick="SwitchZIndex('canvas')"><img src="images/ico_matita.jpg" width="40" height="40" alt=""/></button>
+</div>
+
+<div style="float:left;padding:5px;">
+<button id="evidenz" onclick="SwitchZIndex('canvas')"><img src="images/ico_evidenziatore.jpg" width="40" height="40" alt=""/></button>
+</div>
+
+<div style="float:left;padding:5px;">
+<button id="eraser" onclick="SwitchZIndex('canvas')"><img src="images/ico_gomma.jpg" width="40" height="40" alt=""/></button>
+</div>
+
+<div style="float:left;padding:5px;">
+Punta
+<select name="punta" id="punta" OnChange="SwitchZIndex('canvas');">
+<option value="1">1</option>
+<option value="3">3</option>
+<option value="5">5</option>
+<option value="7">7</option>
+<option value="10">10</option>
+</select>
+</div>
+
+<div style="float:left;padding:5px;">
+Colore
+<select name="colore" id="pcolor" OnChange="SwitchZIndex('canvas');">
+	<option value="black"><span style="color: #000000; font-size: 20px;">&#8226;</span></option>
+<option value="red"><span style="color: #FF0000; font-size: 20px;">&#8226;</span></option>
+<option value="blue"><span style="color: #0000ff; font-size: 20px;">&#8226;</span></option>
+<option value="yellow"><span style="color: #FFE100; font-size: 20px;">&#8226;</span></option>
+</select>
+</div>
+ Livello attivo: <span id="whichlevel">Lavagna</span>
+<input type="hidden" name="alpha" id="alpha" value="1">
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="script/draw.js"></script>
+<script type="text/javascript">
+$(function() {
+  $('<img/>').attr('id', 'full').
+  appendTo('#gallery');
+  $('div.pic', '#gallery').each(function() {
+  
+    var $pic = $(this);
+  
+   /* $('<a/>', {
+      'class': 'zoom',
+      text: 'Zoom'
+    }).appendTo($pic);*/
+    
+    var $a = $('a.zoom', $pic);
+    var $img = $('img', $pic);
+    
+    $img.click(function() {
+    
+     /* $img.animate({
+        opacity: 0.5
+      }, 'slow', function() {
+      
+        $a.fadeIn('slow');
+      
+      
+      });*/
+    
+    
+    });
+    
+    $a.click(function(event) {
+    
+      $('#full').hide();
+    
+      var src = $img.attr('src');
+      $('#full').attr('src', src).fadeIn('slow');
+      
+     /* $a.hide();*/
+      $img.css('opacity', 1);
+    
+    
+    
+    
+    });
+    
+     $('#full').click(function(event) {
+		 $('#full').hide();
+	  });
+  
+  
+  });
+	
+});
+</script>
+</body>
+</html>
